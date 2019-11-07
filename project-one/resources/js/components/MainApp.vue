@@ -1,0 +1,9 @@
+<template>
+    <v-app>
+        <v-container>
+            <v-content>
+                <router-view></router-view>
+            </v-content>
+        </v-container>
+    </v-app>
+</template>
