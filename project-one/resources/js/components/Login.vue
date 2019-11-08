@@ -7,18 +7,18 @@
                 <div class="card">
                     <div class="card-header">Login</div>
                     <div class="card-body">
-                        <form action="" method="">
+                        <form @submit.prevent="login()">
                             <div class="form-group row">
                                 <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
                                 <div class="col-md-6">
-                                    <input type="text" id="email_address" class="form-control" name="email-address" required autofocus>
+                                    <input v-model="user.email" type="text" id="email_address" class="form-control" name="email-address" required autofocus>
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
                                 <div class="col-md-6">
-                                    <input type="password" id="password" class="form-control" name="password" required>
+                                    <input v-model="user.password" type="password" id="password" class="form-control" name="password" required>
                                 </div>
                             </div>
 
@@ -52,6 +52,37 @@
 </main>
 </div>
 </template>
+
+<script>
+export default {
+    data () {
+        return {
+            user: {
+                email: '',
+                password: ''
+            }
+        }
+    },
+
+    methods: {
+        login() {
+            this.$store.dispatch('LOGIN', this.user)
+                .then(() => {
+                    this.$store.dispatch('GET_USER')
+                        .then(() => {
+                            this.$router.push('/services')
+                        })
+                        .catch(error => {
+                            console.log(error)
+                        })
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        }
+    }
+}
+</script>
 
 <style>
 body{
