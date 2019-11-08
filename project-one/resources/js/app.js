@@ -5,6 +5,9 @@ import VueRouter from 'vue-router';
 import Vuetify from 'vuetify';
 import { routes } from './routes';
 import { store } from './store/store';
+import { api } from './api';
+
+window.api = api
 
 Vue.use(VueRouter)
 Vue.use(Vuetify)
